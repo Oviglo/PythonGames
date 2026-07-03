@@ -14,14 +14,19 @@ class Ball(pygame.sprite.Sprite):
         self.rect.center = (terrain_size.x // 2, terrain_size.y // 2)
         self.bounce_count = 0
 
+        # Son de rebond
+        self.sound_bip = pygame.mixer.Sound("sound/bip.wav")
+
     def update(self):
         self.rect.y += (self.speed * self.y_dir)
         self.rect.x += (self.speed * self.x_dir)
 
         if (self.rect.y > (self.terrain_size.y - self.rect.h)):
             self.y_dir = -1
+            self.sound_bip.play()
         elif ( self.rect.y < 0):
             self.y_dir = 1
+            self.sound_bip.play()
 
         if self.bounce_count >= 10:
             self.speed += 1
@@ -43,6 +48,7 @@ class Ball(pygame.sprite.Sprite):
             elif (racquet_rect.right >= self.rect.right):
                 self.x_dir = -1
             self.bounce_count += 1
+            self.sound_bip.play()
 
     def out_left(self) -> bool:
         return self.rect.left < 0

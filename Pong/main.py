@@ -9,6 +9,9 @@ SCREEN_HEIGHT = 720
 
 pygame.init()
 
+sound_win = pygame.mixer.Sound("sound/win.wav")
+sound_loose = pygame.mixer.Sound("sound/loose.wav")
+
 pygame.display.set_caption("Pypong")
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
@@ -87,9 +90,11 @@ while run:
             ready_time = pygame.time.get_ticks()
             if ball.out_left():
                 opponent_score += 1
+                sound_loose.play()
             # le joueur gagne
             if ball.out_right():
                 player_score += 1
+                sound_win.play()
 
             ball.reset()
 
