@@ -37,7 +37,6 @@ opponent_score = 0
 class GameStat(Enum):
     READY = 0
     PLAY = 1
-    PAUSE = 2
 
 game_stat: GameStat = GameStat.READY
 
